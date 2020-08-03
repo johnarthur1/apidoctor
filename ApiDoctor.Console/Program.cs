@@ -2152,7 +2152,11 @@ namespace ApiDoctor.ConsoleApp
                     /* DUMP THE SDK LINK FILE */
                     var sdkLinkDirectory = Directory.GetParent(Path.GetDirectoryName(method.SourceFile.FullPath)) + "/" + relativePathFolder;
                     Directory.CreateDirectory(sdkLinkDirectory);
-                    File.WriteAllText(sdkLinkDirectory + "/" + includeSdkFileName, includeSdkText);
+                    // only dump a new file when it does not exist.
+                    if (!File.Exists(sdkLinkDirectory + "/" + includeSdkFileName))
+                    {
+                        File.WriteAllText(sdkLinkDirectory + "/" + includeSdkFileName, includeSdkText);
+                    }
                     break;
                 }
                 case "AdditionalTabInsertion":
